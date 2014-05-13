@@ -31,6 +31,13 @@ def download_new():
 	sub.call("cd ~/Pharo && wget -O- get.pharo.org/30+vmLatest | bash", shell=True)
 	
 
+def set_memory():
+	"""
+	Increase the maximum memory
+	"""
+	sub.call("sed -i '' 's/536870912/900000000/g' ~/Pharo/pharo-vm/Pharo.app/Contents/Info.plist", shell=True)
+	
+
 def start_pharo():
 	"""
 	Starting Pharo
@@ -46,6 +53,7 @@ def main():
 	if args['new']:
 		move_to_old()
 		download_new()
+		set_memory()
 	start_pharo()
 
 
